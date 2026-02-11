@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>ჩემი ვალენტინი ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border: 3px solid white;
+        }
+        
+        h1 {
+            color: #d63031;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+        
+        .question {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #2d3436;
+            font-weight: bold;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .btn-yes {
+            background: #00b894;
+            color: white;
+        }
+        
+        .btn-yes:hover {
+            background: #00a884;
+            transform: scale(1.1);
+        }
+        
+        .btn-no {
+            background: #d63031;
+            color: white;
+        }
+        
+        .btn-no:hover {
+            background: #c0392b;
+        }
+        
+        .gif-container {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .gif-container img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff4757;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .message {
+            font-size: 2rem;
+            color: #e84342;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- მუსიკის ღილაკი -->
+    <button class="music-btn" id="musicBtn">🔇</button>
+    
+    <!-- აუდიო ელემენტი - რომანტიული მუსიკა -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/10/29/audio_76b30398f7.mp3?filename=romantic-dinner-116393.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2023/02/14/audio_4d18669607.mp3?filename=valentine-138490.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container" id="container">
+        <h1>❤️ ვალენტინობა ❤️</h1>
+        <div class="question">
+            ნიცც იქნები ჩემი ვალენტინი? 😉
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-yes" id="yesBtn">კი</button>
+            <button class="btn btn-no" id="noBtn">არა</button>
+        </div>
+        
+        <div class="gif-container" id="gifContainer">
+            <!-- The Office - Michael Scott's famous dance -->
+            <img src="https://media.giphy.com/media/l41YkuPROHQj1IrAY/giphy.gif" alt="The Office Dance">
+        </div>
+        
+        <div class="message" id="message">
+            Love you 😎 <br>
+            ❤️❤️❤️
+        </div>
+    </div>
+    
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <script>
+        let noClickCount = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const message = document.getElementById('message');
+        const gifContainer = document.getElementById('gifContainer');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        let isMusicPlaying = false;
+        
+        // მუსიკის კონტროლი
+        musicBtn.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                musicBtn.style.background = 'white';
+                musicBtn.style.color = 'black';
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log("აუდიოს დაკვრა ვერ მოხერხდა");
+                });
+                musicBtn.textContent = '🎵';
+                musicBtn.style.background = '#ff7675';
+                musicBtn.style.color = 'white';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
+        // ავტომატურად ჩართვა პირველი შეხებისას (ტელეფონისთვის)
+        document.body.addEventListener('touchstart', function initMusic() {
+            if (!isMusicPlaying) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.textContent = '🎵';
+                    musicBtn.style.background = '#ff7675';
+                    musicBtn.style.color = 'white';
+                }).catch(e => console.log("ავტომატური ჩართვა ვერ მოხერხდა"));
+            }
+            document.body.removeEventListener('touchstart', initMusic);
+        }, { once: true });
+        
+        // გულების დაყრა
+        function createHearts() {
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+        
+        // კი ღილაკზე დაჭერა
+        yesBtn.addEventListener('click', function() {
+            // ყველაფრის დამალვა
+            document.querySelector('.question').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // გიფის ჩვენება
+            gifContainer.style.display = 'block';
+            
+            // მესიჯის ჩვენება
+            message.style.display = 'block';
+            
+            // გულების დაყრა
+            createHearts();
+            
+            // მუსიკის დაკვრა
+            if (!isMusicPlaying) {
+                bgMusic.play().catch(e => console.log("აუდიოს დაკვრა ვერ მოხერხდა"));
+                musicBtn.textContent = '🎵';
+                musicBtn.style.background = '#ff7675';
+                musicBtn.style.color = 'white';
+                isMusicPlaying = true;
+            }
+        });
+        
+        // არა ღილაკზე დაჭერა
+        noBtn.addEventListener('click', function() {
+            noClickCount++;
+            
+            // არას ღილაკის დაპატარავება
+            const currentSize = parseInt(window.getComputedStyle(noBtn).fontSize);
+            noBtn.style.fontSize = Math.max(10, currentSize - 4) + 'px';
+            noBtn.style.padding = Math.max(5, 15 - noClickCount) + 'px ' + Math.max(10, 40 - noClickCount * 2.5) + 'px';
+            
+            // კი ღილაკის გადიდება
+            const yesCurrentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (yesCurrentSize + 10) + 'px';
+            yesBtn.style.padding = (15 + noClickCount * 2) + 'px ' + (40 + noClickCount * 4) + 'px';
+            
+            // არას ღილაკის მიმალვა
+            if (noClickCount >= 6) {
+                noBtn.style.display = 'none';
+            }
+            
+            // პატარა გული ყოველ დაჭერაზე
+            const smallHeart = document.createElement('div');
+            smallHeart.className = 'heart';
+            smallHeart.innerHTML = '❤️';
+            smallHeart.style.left = Math.random() * 100 + '%';
+            smallHeart.style.fontSize = '30px';
+            smallHeart.style.animationDuration = '2s';
+            heartsContainer.appendChild(smallHeart);
+            
+            setTimeout(() => {
+                smallHeart.remove();
+            }, 2000);
+        });
+        
+        // ტელეფონისთვის ტაპის ეფექტი
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // ინიციალიზაცია
+        console.log('❤️ ვალენტინობის საიტი მზად არის! ❤️');
+        
+    </script>
+</body>
+</html>
